@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.text.FlxText;
@@ -11,7 +12,7 @@ class PauseState extends FlxSubState
 {
 	public function new()
 	{
-		super(0x33000000);
+		super();
 	}
 
 	override function create()
@@ -37,6 +38,16 @@ class PauseState extends FlxSubState
 		add(bg);
 		add(text);
 		add(button);
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		if (FlxG.keys.justPressed.ENTER)
+		{
+			closeSub();
+		}
 	}
 
 	private function closeSub():Void

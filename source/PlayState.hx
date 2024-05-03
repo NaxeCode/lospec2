@@ -43,7 +43,7 @@ class PlayState extends FlxState
 	function handlePause() {
 		if (FlxG.keys.justPressed.ENTER)
 		{
-			
+			openSubState(new PauseState());
 		}
 	}
 }
