@@ -21,6 +21,12 @@ class Enemy extends FlxSprite
 
 	function createPhysics() {}
 
+	override function kill()
+	{
+		Sounds.EnemyDies();
+		super.kill();
+	}
+
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);

@@ -19,7 +19,7 @@ class PauseState extends FlxSubState
 	{
 		super.create();
 
-		Sounds.playMenuConfirm();
+		Sounds.MenuConfirm();
 
 		var text = new FlxText();
 		text.text = "- Paused -";
@@ -54,7 +54,7 @@ class PauseState extends FlxSubState
 
 	private function closeSub():Void
 	{
-		Sounds.playMenuConfirm();
+		Sounds.MenuConfirm();
 		close();
 	}
 }

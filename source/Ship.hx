@@ -23,7 +23,7 @@ class Ship extends FlxSprite
 
 	static inline var maxBulletAmount:Int = 30;
 
-	var bulletPool:FlxTypedGroup<Bullet>;
+	public var bulletPool:FlxTypedGroup<Bullet>;
 	var coolingDown:Bool = false;
 	var coolingDownTimer:FlxTimer;
 
@@ -81,6 +81,7 @@ class Ship extends FlxSprite
 
 		if (shoot && !coolingDown)
 		{
+			Sounds.PlayerShoots();
 			bulletPool.recycle().setPosition(this.x + this.origin.x, this.y + this.origin.y);
 			coolingDown = true;
 			coolingDownTimer.reset();
