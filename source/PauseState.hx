@@ -19,6 +19,8 @@ class PauseState extends FlxSubState
 	{
 		super.create();
 
+		Sounds.playMenuConfirm();
+
 		var text = new FlxText();
 		text.text = "- Paused -";
 		text.color = FlxColor.PINK;
@@ -52,6 +54,7 @@ class PauseState extends FlxSubState
 
 	private function closeSub():Void
 	{
+		Sounds.playMenuConfirm();
 		close();
 	}
 }
