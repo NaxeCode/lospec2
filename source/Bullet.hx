@@ -17,7 +17,7 @@ class Bullet extends FlxSprite
     }
 
     function createGraphic() {
-        makeGraphic(6, 6, FlxColor.WHITE);
+		makeGraphic(4, 6, FlxColor.WHITE);
     }
 
     function setPhysics() {

@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxSpriteUtil;
 
@@ -22,7 +23,7 @@ class EnemyGroup extends FlxTypedGroup<Enemy>
 			add(enemy);
 		}
 
-		FlxSpriteUtil.space(cast this.members, 100, 100, 35, null, false);
+		FlxSpriteUtil.space(cast this.members, FlxG.width / 10, FlxG.height / 10, 35, null, false);
 	}
 
 	override function update(elapsed:Float)

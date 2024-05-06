@@ -16,7 +16,7 @@ class Enemy extends FlxSprite
 
 	function createGraphic()
 	{
-		makeGraphic(32, 32, FlxColor.RED);
+		makeGraphic(16, 16, FlxColor.RED);
 	}
 
 	function createPhysics() {}

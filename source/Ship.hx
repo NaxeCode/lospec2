@@ -42,7 +42,7 @@ class Ship extends FlxSprite
 
 	function createGraphic()
 	{
-		makeGraphic(32, 32, FlxColor.GREEN);
+		makeGraphic(16, 16, FlxColor.GREEN);
 	}
 
 	public function setPhysics()
