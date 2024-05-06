@@ -4,7 +4,7 @@ import flixel.FlxG;
 
 class Sounds
 {
-	static inline var vol_sfx:Float = 1.0;
+	static inline var vol_sfx:Float = 0.70;
 	static inline var vol_music:Float = 0.25;
 
 	public static function World1()

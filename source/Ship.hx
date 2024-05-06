@@ -14,12 +14,14 @@ class Ship extends FlxSprite
 	var right:Bool = false;
 	var shoot:Bool = false;
 
-	static inline var SPEED:Int = 1500;
+	public var SPEED:Int = 65;
 
-	var drag_X:Int = 1500;
-	var drag_Y:Int = 1500;
-	var maxVel_X:Int = 300;
-	var maxVel_Y:Int = 300;
+	public var RECOIL:Int = 20;
+
+	public var drag_X:Int = 1000;
+	public var drag_Y:Int = 1000;
+	public var maxVel_X:Int = 250;
+	public var maxVel_Y:Int = 250;
 
 	static inline var maxBulletAmount:Int = 30;
 
@@ -32,8 +34,10 @@ class Ship extends FlxSprite
 		super(X, Y);
 
 		createGraphic();
-		createPhysics();
+		setPhysics();
 		setupGun();
+		FlxG.watch.add(this, "maxVelocity");
+		FlxG.watch.add(this, "velocity");
 	}
 
 	function createGraphic()
@@ -41,7 +45,7 @@ class Ship extends FlxSprite
 		makeGraphic(32, 32, FlxColor.GREEN);
 	}
 
-	function createPhysics()
+	public function setPhysics()
 	{
 		this.drag.set(drag_X, drag_Y);
 		this.maxVelocity.set(maxVel_X, maxVel_Y);
@@ -68,7 +72,7 @@ class Ship extends FlxSprite
 
 	function updatePhysics()
 	{
-		acceleration.set(0, 0);
+		// acceleration.set(0, 0);
 	}
 
 	function updateControls()
@@ -81,6 +85,7 @@ class Ship extends FlxSprite
 
 		if (shoot && !coolingDown)
 		{
+			velocity.y += RECOIL;
 			Sounds.PlayerShoots();
 			bulletPool.recycle().setPosition(this.x + this.origin.x, this.y + this.origin.y);
 			coolingDown = true;
@@ -92,6 +97,33 @@ class Ship extends FlxSprite
 		if (left && right)
 			left = right = false;
 
+		var tempSpeed:Float = SPEED;
+
+		if (up && left || up && right || down && left || down && right)
+			this.maxVelocity.set(maxVel_X / 1.4, maxVel_Y / 1.4);
+		else
+			this.maxVelocity.set(maxVel_X, maxVel_Y);
+
+		if (up)
+			velocity.y -= tempSpeed;
+		if (down)
+			velocity.y += tempSpeed;
+		if (left)
+			velocity.x -= tempSpeed;
+		if (right)
+			velocity.x += tempSpeed;
+
+		// determine our velocity based on angle and speed
+		// velocity.setPolarDegrees(SPEED, newAngle);
+	}
+
+	function handleMovementOLD()
+	{
+		up = FlxG.keys.anyPressed([UP, W]);
+		down = FlxG.keys.anyPressed([DOWN, S]);
+		left = FlxG.keys.anyPressed([LEFT, A]);
+		right = FlxG.keys.anyPressed([RIGHT, D]);
+		shoot = FlxG.keys.anyPressed([SPACE, Z]);
 		if (up || down || left || right)
 		{
 			var newAngle:Float = 0;
@@ -123,9 +155,6 @@ class Ship extends FlxSprite
 				newAngle = 0;
 				facing = RIGHT;
 			}
-
-			// determine our velocity based on angle and speed
-			acceleration.setPolarDegrees(SPEED, newAngle);
 		}
 	}
 }
