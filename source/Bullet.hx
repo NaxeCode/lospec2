@@ -12,7 +12,7 @@ class Bullet extends FlxSprite
         super(0, 0);
 
         createGraphic();
-        setPhysics();
+		setDefaultPhysics();
         kill();
     }
 
@@ -20,8 +20,19 @@ class Bullet extends FlxSprite
 		makeGraphic(4, 6, FlxColor.WHITE);
     }
 
-    function setPhysics() {
-        this.velocity.y = -SPEED;
+	public function setDefaultPhysics()
+	{
+		this.velocity.set(SPEED, 0);
+	}
+
+	public function bulletUpSpeed()
+	{
+		this.velocity.set(0, -SPEED);
+	}
+
+	public function bulletDownSpeed()
+	{
+		this.velocity.set(0, SPEED);
     }
 
     override function update(elapsed:Float) {

@@ -83,15 +83,6 @@ class Ship extends FlxSprite
 		right = FlxG.keys.anyPressed([RIGHT, D]);
 		shoot = FlxG.keys.anyPressed([SPACE, Z]);
 
-		if (shoot && !coolingDown)
-		{
-			velocity.y += RECOIL;
-			Sounds.PlayerShoots();
-			bulletPool.recycle().setPosition(this.x + this.origin.x, this.y + this.origin.y);
-			coolingDown = true;
-			coolingDownTimer.reset();
-		}
-
 		if (up && down)
 			up = down = false;
 		if (left && right)
@@ -113,8 +104,21 @@ class Ship extends FlxSprite
 		if (right)
 			velocity.x += tempSpeed;
 
-		// determine our velocity based on angle and speed
-		// velocity.setPolarDegrees(SPEED, newAngle);
+		if (shoot && !coolingDown)
+		{
+			velocity.y += RECOIL;
+			Sounds.PlayerShoots();
+			var bllt = bulletPool.recycle();
+			bllt.setPosition(this.x + this.origin.x, this.y + this.origin.y);
+			if (up)
+				bllt.bulletUpSpeed();
+			else if (down)
+				bllt.bulletDownSpeed();
+			else
+				bllt.setDefaultPhysics();
+			coolingDown = true;
+			coolingDownTimer.reset();
+		}
 	}
 
 	function handleMovementOLD()
