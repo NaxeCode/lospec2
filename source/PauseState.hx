@@ -81,11 +81,11 @@ class PauseState extends FlxSubState
 					strang = "maxVel_Y";
 					maxValue = 500;
 			}
-			var debugUI = new FlxSlider(ship, strang, 0, 0, 0, maxValue, 400, 30, 10, 0xFFFFFFFF);
+			var debugUI = new FlxSlider(ship, strang, 0, 0, 0, maxValue, 100, 3, 10, 0xFFFFFFFF);
 			debugUI.screenCenter();
 			debugUI.x += 30;
-			debugUI.y -= 180;
-			debugUI.y += (i * 70);
+			debugUI.y -= 75;
+			debugUI.y += (i * 30);
 			add(debugUI);
 		}
 	}

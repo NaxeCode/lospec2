@@ -14,14 +14,14 @@ class Ship extends FlxSprite
 	var right:Bool = false;
 	var shoot:Bool = false;
 
-	public var SPEED:Int = 65;
+	public var SPEED:Int = 40;
 
 	public var RECOIL:Int = 20;
 
 	public var drag_X:Int = 1000;
 	public var drag_Y:Int = 1000;
-	public var maxVel_X:Int = 250;
-	public var maxVel_Y:Int = 250;
+	public var maxVel_X:Int = 150;
+	public var maxVel_Y:Int = 150;
 
 	static inline var maxBulletAmount:Int = 30;
 
@@ -75,6 +75,7 @@ class Ship extends FlxSprite
 		// acceleration.set(0, 0);
 	}
 
+	var dir:String = "";
 	function updateControls()
 	{
 		up = FlxG.keys.anyPressed([UP, W]);
@@ -95,14 +96,36 @@ class Ship extends FlxSprite
 		else
 			this.maxVelocity.set(maxVel_X, maxVel_Y);
 
+
 		if (up)
+		{
+			dir = "up";
 			velocity.y -= tempSpeed;
+		}
 		if (down)
+		{
+			dir = "down";
 			velocity.y += tempSpeed;
+		}
 		if (left)
+		{
+			dir = "left";
 			velocity.x -= tempSpeed;
+		}
 		if (right)
+		{
+			dir = "right";
 			velocity.x += tempSpeed;
+		}
+
+		if (up && left)
+			dir = "upL";
+		if (up && right)
+			dir = "upR";
+		if (down && left)
+			dir = "downL";
+		if (down && right)
+			dir = "downR";
 
 		if (shoot && !coolingDown)
 		{
@@ -110,12 +133,25 @@ class Ship extends FlxSprite
 			Sounds.PlayerShoots();
 			var bllt = bulletPool.recycle();
 			bllt.setPosition(this.x + this.origin.x, this.y + this.origin.y);
-			if (up)
-				bllt.bulletUpSpeed();
-			else if (down)
-				bllt.bulletDownSpeed();
-			else
-				bllt.setDefaultPhysics();
+			switch (dir)
+			{
+				case "upL":
+					bllt.velocity.set(-bllt.SPEED, -bllt.SPEED);
+				case "upR":
+					bllt.velocity.set(bllt.SPEED, -bllt.SPEED);
+				case "downL":
+					bllt.velocity.set(-bllt.SPEED, bllt.SPEED);
+				case "downR":
+					bllt.velocity.set(bllt.SPEED, bllt.SPEED);
+				case "up":
+					bllt.velocity.set(0, -bllt.SPEED);
+				case "down":
+					bllt.velocity.set(0, bllt.SPEED);
+				case "left":
+					bllt.velocity.set(-bllt.SPEED, 0);
+				case "right":
+					bllt.velocity.set(bllt.SPEED, 0);
+			}
 			coolingDown = true;
 			coolingDownTimer.reset();
 		}

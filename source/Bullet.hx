@@ -5,7 +5,7 @@ import flixel.util.FlxColor;
 
 class Bullet extends FlxSprite
 {
-    static inline var SPEED:Int = 500;
+	public var SPEED:Int = 500;
 
     public function new()
     {
@@ -24,16 +24,6 @@ class Bullet extends FlxSprite
 	{
 		this.velocity.set(SPEED, 0);
 	}
-
-	public function bulletUpSpeed()
-	{
-		this.velocity.set(0, -SPEED);
-	}
-
-	public function bulletDownSpeed()
-	{
-		this.velocity.set(0, SPEED);
-    }
 
     override function update(elapsed:Float) {
         super.update(elapsed);
