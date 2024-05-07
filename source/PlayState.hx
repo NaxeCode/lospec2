@@ -52,6 +52,10 @@ class PlayState extends FlxState
 			blt.kill();
 			enm.kill();
 		});
+		FlxG.overlap(player, enemyGroup, (plr:Ship, enm:Enemy) ->
+		{
+			plr.hurt();
+		});
 	}
 
 	function handlePause() {

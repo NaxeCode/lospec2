@@ -2,12 +2,17 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.effects.FlxFlicker;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxColor;
+import flixel.util.FlxSpriteUtil;
 import flixel.util.FlxTimer;
 
 class Ship extends FlxSprite
 {
+	var health:Int = 5;
+	var flickering:Bool = false;
+
 	var up:Bool = false;
 	var down:Bool = false;
 	var left:Bool = false;
@@ -42,7 +47,7 @@ class Ship extends FlxSprite
 
 	function createGraphic()
 	{
-		makeGraphic(16, 16, FlxColor.GREEN);
+		makeGraphic(16, 16, FlxColor.fromInt(0xFF007062));
 	}
 
 	public function setPhysics()
@@ -196,5 +201,18 @@ class Ship extends FlxSprite
 				facing = RIGHT;
 			}
 		}
+	}
+	public function hurt()
+	{
+		if (flickering)
+			return;
+		health -= 1;
+		if (health <= 0)
+			this.kill();
+		FlxSpriteUtil.flicker(this, 1, 0.04, true, true, (flkr:FlxFlicker) ->
+		{
+			flickering = false;
+		});
+		flickering = true;
 	}
 }
