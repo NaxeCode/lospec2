@@ -1,5 +1,6 @@
 package;
 
+import Mouth.BadMouth;
 import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxSpriteUtil;
@@ -20,9 +21,12 @@ class EnemyGroup extends FlxTypedGroup<Enemy>
 
 	function addEnemies()
 	{
-		for (i in 0...enemyCount)
+		for (i in 0...Std.int(enemyCount / 2))
 		{
-			var enemy = new Enemy(0, 0);
+			var enemy = new IceHedgehog();
+			enemy.kill();
+			add(enemy);
+			var enemy = new BadMouth();
 			enemy.kill();
 			add(enemy);
 		}
