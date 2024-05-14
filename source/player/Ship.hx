@@ -1,4 +1,4 @@
-package;
+package player;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -134,13 +134,16 @@ class Ship extends FlxSprite
 
 		if (shoot && !coolingDown)
 		{
-			velocity.y += RECOIL;
+			var tempRecoilY = 0;
+			var tempRecoilX = 0;
 			Sounds.PlayerShoots();
 			var bllt = bulletPool.recycle();
 			bllt.setPosition(this.x + this.origin.x, this.y + this.origin.y);
 			switch (dir)
 			{
 				case "upL":
+					tempRecoilY += RECOIL;
+					tempRecoilX += RECOIL;
 					bllt.velocity.set(-bllt.SPEED, -bllt.SPEED);
 				case "upR":
 					bllt.velocity.set(bllt.SPEED, -bllt.SPEED);
@@ -157,6 +160,8 @@ class Ship extends FlxSprite
 				case "right":
 					bllt.velocity.set(bllt.SPEED, 0);
 			}
+			velocity.y += tempRecoilY;
+			velocity.y += tempRecoilX;
 			coolingDown = true;
 			coolingDownTimer.reset();
 		}

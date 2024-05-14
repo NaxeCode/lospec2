@@ -1,9 +1,12 @@
 package;
 
+import enemies.Enemy;
+import enemies.EnemyGroup;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.addons.display.FlxStarField.FlxStarField2D;
 import flixel.util.FlxColor;
+import player.*;
 
 class PlayState extends FlxState
 {
@@ -50,7 +53,7 @@ class PlayState extends FlxState
 		FlxG.overlap(player.bulletPool, enemyGroup, (blt:Bullet, enm:Enemy) ->
 		{
 			blt.kill();
-			enm.kill();
+			enm.hurt();
 		});
 		FlxG.overlap(player, enemyGroup, (plr:Ship, enm:Enemy) ->
 		{

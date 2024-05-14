@@ -1,6 +1,6 @@
-package;
+package enemies;
 
-import Mouth.BadMouth;
+import enemies.Mouth.BadMouth;
 import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxSpriteUtil;
@@ -9,6 +9,7 @@ import flixel.util.FlxTimer;
 class EnemyGroup extends FlxTypedGroup<Enemy>
 {
 	static inline var enemyCount:Int = 10;
+
 	var spawnTimer:FlxTimer;
 
 	public function new()
@@ -40,7 +41,7 @@ class EnemyGroup extends FlxTypedGroup<Enemy>
 		{
 			var enemy = recycle();
 			enemy.setPosition(FlxG.width, FlxG.random.int(0, FlxG.height - 16));
-			enemy.velocity.x = -100;
+			enemy.velocity.x = -80;
 		}, 0);
 	}
 

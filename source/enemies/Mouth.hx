@@ -1,4 +1,4 @@
-package;
+package enemies;
 
 import flixel.util.FlxColor;
 

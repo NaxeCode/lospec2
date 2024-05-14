@@ -1,4 +1,4 @@
-package;
+package enemies;
 
 import flixel.util.FlxColor;
 
@@ -7,6 +7,7 @@ class IceHedgehog extends Enemy
 	public function new()
 	{
 		super();
+		this.isHedgehog = true;
 	}
 
 	override function createGraphic()
