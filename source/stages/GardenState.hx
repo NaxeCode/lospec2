@@ -2,11 +2,13 @@ package stages;
 
 import enemies.Enemy;
 import enemies.EnemyGroup;
+import enemies.IceHedgehog;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.addons.display.FlxStarField.FlxStarField2D;
 import flixel.util.FlxColor;
 import player.*;
+import utils.HelperFunctions;
 
 class GardenState extends FlxState
 {
@@ -53,8 +55,14 @@ class GardenState extends FlxState
 	{
 		FlxG.overlap(player.bulletPool, enemyGroup, (blt:Bullet, enm:Enemy) ->
 		{
-			blt.kill();
+			if (enm.isHedgehog)
+			{
+				HelperFunctions.moveTowardsWithForce(enm, blt, 150, 150);
+				blt.kill();
+				return;
+			}
 			enm.hurt();
+			blt.kill();
 		});
 		FlxG.overlap(player, enemyGroup, (plr:Ship, enm:Enemy) ->
 		{

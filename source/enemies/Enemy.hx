@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 import flixel.effects.FlxFlicker;
 import flixel.util.FlxColor;
 import flixel.util.FlxSpriteUtil;
+import utils.HelperFunctions;
 
 class Enemy extends FlxSprite
 {

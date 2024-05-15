@@ -4,10 +4,13 @@ import flixel.util.FlxColor;
 
 class IceHedgehog extends Enemy
 {
+	var drag_X:Int = 100;
+	var drag_Y:Int = 100;
 	public function new()
 	{
 		super();
 		this.isHedgehog = true;
+		drag.set(drag_X, drag_Y);
 	}
 
 	override function createGraphic()

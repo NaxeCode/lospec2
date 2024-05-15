@@ -6,6 +6,10 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxSpriteUtil;
 import flixel.util.FlxTimer;
 
+enum EnemyType
+{
+	ICEHEDGE;
+}
 class EnemyGroup extends FlxTypedGroup<Enemy>
 {
 	static inline var enemyCount:Int = 10;
@@ -16,20 +20,35 @@ class EnemyGroup extends FlxTypedGroup<Enemy>
 	{
 		super(enemyCount);
 
-		addEnemies();
-		setTimer();
+		// setTimer();
+		addIceHedgehog();
 	}
 
-	function addEnemies()
+	private function addIceHedgehog()
 	{
-		for (i in 0...Std.int(enemyCount / 2))
+		var hedge = new IceHedgehog();
+		hedge.screenCenter();
+		hedge.x += 50;
+		add(hedge);
+
+		var mouth = new Mouth();
+		mouth.screenCenter();
+		mouth.y += 50;
+		mouth.x += 35;
+		add(mouth);
+		mouth = new Mouth();
+		mouth.screenCenter();
+		mouth.y -= 50;
+		mouth.x += 35;
+		add(mouth);
+	}
+
+	public function addEnemies(howMany:Int = 1, enemyType:EnemyType)
+	{
+		for (i in 0...howMany)
 		{
-			var enemy = new IceHedgehog();
-			enemy.kill();
-			add(enemy);
-			var enemy = new BadMouth();
-			enemy.kill();
-			add(enemy);
+			var en = new IceHedgehog();
+			add(en);
 		}
 
 		// FlxSpriteUtil.space(cast this.members, FlxG.width / 10, FlxG.height / 10, 35, null, false);
