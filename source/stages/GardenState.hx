@@ -1,4 +1,4 @@
-package;
+package stages;
 
 import enemies.Enemy;
 import enemies.EnemyGroup;
@@ -8,12 +8,13 @@ import flixel.addons.display.FlxStarField.FlxStarField2D;
 import flixel.util.FlxColor;
 import player.*;
 
-class PlayState extends FlxState
+class GardenState extends FlxState
 {
 	public var player:Ship;
 	public var enemyGroup:EnemyGroup;
 
 	var bg:FlxStarField2D;
+	
 	override public function create()
 	{
 		super.create();
