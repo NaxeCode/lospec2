@@ -13,7 +13,7 @@ import utils.HelperFunctions;
 class GardenState extends FlxState
 {
 	public var player:Ship;
-	public var enemyGroup:EnemyGroup;
+	public static var enemyGroup:EnemyGroup;
 
 	var bg:FlxStarField2D;
 	
