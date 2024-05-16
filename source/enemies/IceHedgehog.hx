@@ -1,16 +1,18 @@
 package enemies;
 
 import flixel.util.FlxColor;
+import flixel.util.FlxSpriteUtil;
 
 class IceHedgehog extends Enemy
 {
 	var drag_X:Int = 100;
 	var drag_Y:Int = 100;
+	public var hitCounter:Int = 5;
 	public function new()
 	{
 		super();
 		this.isHedgehog = true;
-		drag.set(drag_X, drag_Y);
+		// drag.set(drag_X, drag_Y);
 	}
 
 	override function createGraphic()
@@ -21,5 +23,6 @@ class IceHedgehog extends Enemy
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		FlxSpriteUtil.screenWrap(this);
 	}
 }

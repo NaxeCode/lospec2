@@ -57,7 +57,13 @@ class GardenState extends FlxState
 		{
 			if (enm.isHedgehog)
 			{
-				HelperFunctions.moveTowardsWithForce(enm, blt, 150, 150);
+				cast(enm, IceHedgehog).hitCounter -= 1;
+				if (cast(enm, IceHedgehog).hitCounter <= 0)
+				{
+					var randomW = FlxG.random.int(200, 450);
+					var randomH = FlxG.random.int(200, 450);
+					HelperFunctions.moveTowardsWithForce(enm, blt, randomW, randomH);
+				}
 				blt.kill();
 				return;
 			}
