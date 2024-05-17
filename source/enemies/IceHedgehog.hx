@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.util.FlxSpriteUtil;
+import flixel.util.FlxTimer;
 import stages.GardenState;
 
 class IceHedgehog extends Enemy
@@ -38,6 +39,16 @@ class IceHedgehog extends Enemy
 			hedge.hurt();
 			enm.hurt();
 			enm.drag.set(drag_X, drag_Y);
+			// zawardo();
+			// FlxG.timeScale = 0.01;
+		});
+	}
+
+	function zawardo()
+	{
+		new FlxTimer().start(0.01, (tmr:FlxTimer) ->
+		{
+			FlxG.timeScale = 1;
 		});
 	}
 	public function bounce(sprite:FlxSprite):FlxSprite
